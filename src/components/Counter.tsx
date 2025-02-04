@@ -1,4 +1,12 @@
-import { Box, Button, Text, Stack, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Grid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 const Counter = ({
   count,
@@ -7,62 +15,43 @@ const Counter = ({
   count: number;
   setCount: (count: number) => void;
 }) => {
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(Math.max(0, count - 1));
+  const reset = () => setCount(0);
+
+  // Calculate background color intensity based on count
+  const backgroundColor = `rgba(130, 0, 219, ${Math.min(count * 0.1, 1)})`;
+
   return (
     <Box
-      bg="white"
-      boxShadow="lg"
-      borderWidth="1px"
+      transition="background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
+      backgroundColor={backgroundColor}
+      borderWidth={1}
       borderColor="gray.200"
-      borderRadius="xl"
-      p={6}
-      maxW="sm"
-      width="100%"
-      _dark={{
-        bg: "gray.800",
-        borderColor: "gray.600",
-      }}
+      borderRadius="lg"
+      rounded="md"
     >
-      <Stack align="center">
-        <Text
-          fontSize="4xl"
-          fontWeight="bold"
-          color="gray.800"
-          _dark={{ color: "white" }}
-        >
-          {count}
-        </Text>
-        <Text fontSize="md" color="gray.600" _dark={{ color: "gray.400" }}>
-          Counter
-        </Text>
-        <HStack>
-          <Button
-            colorScheme="red"
-            size="md"
-            onClick={() => setCount(count - 1)}
-            aria-label="Decrease count"
-          >
-            -
-          </Button>
-          <Button
-            colorScheme="gray"
-            size="md"
-            onClick={() => setCount(0)}
-            aria-label="Reset count"
-          >
-            Reset
-          </Button>
-          <Button
-            colorScheme="green"
-            size="md"
-            onClick={() => setCount(count + 1)}
-            aria-label="Increase count"
-          >
-            +
-          </Button>
-        </HStack>
-      </Stack>
+      <Container py={10}>
+        <VStack>
+          <Flex direction="column" alignItems="center" my={5}>
+            <Text fontSize="6xl" fontWeight="bold">
+              {count}
+            </Text>
+            <Text>Counter</Text>
+          </Flex>
+
+          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <Button onClick={decrement} disabled={count === 0}>
+              -
+            </Button>
+            <Button onClick={reset} disabled={count === 0}>
+              Reset
+            </Button>
+            <Button onClick={increment}>+</Button>
+          </Grid>
+        </VStack>
+      </Container>
     </Box>
   );
 };
-
 export default Counter;

@@ -1,7 +1,6 @@
 import { Container, Grid, GridItem } from "@chakra-ui/react";
-import Counter from "./components/Counter";
 import { useState } from "react";
-
+import Counter from "./components/Counter";
 function App() {
   const [count, setCount] = useState(0);
 
