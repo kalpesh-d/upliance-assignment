@@ -2,28 +2,27 @@ import { Box } from "@chakra-ui/react";
 import { Editor, EditorContent, useEditor } from "@tiptap/react";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
+import { useDispatch, useSelector } from "react-redux";
 import MenuBar from "./MenuBar";
-import { STORAGE_KEY } from "../App";
 import { toaster } from "./ui/toaster";
-
-interface RichTextEditorProps {
-  content: string;
-  setContent: (content: string) => void;
-  hasUnsavedChanges: boolean;
-  setHasUnsavedChanges: (value: boolean) => void;
-}
-
-const RichTextEditor = ({
-  content,
+import { RootState } from "../store/store";
+import {
   setContent,
-  hasUnsavedChanges,
   setHasUnsavedChanges,
-}: RichTextEditorProps) => {
+  saveContent,
+} from "../store/slices/editorSlice";
+
+const RichTextEditor = () => {
+  const dispatch = useDispatch();
+  const content = useSelector((state: RootState) => state.editor.content);
+  const hasUnsavedChanges = useSelector(
+    (state: RootState) => state.editor.hasUnsavedChanges
+  );
+
   const handleSave = (editor: Editor) => {
     const newContent = editor?.getHTML() ?? "";
-    setContent(newContent);
-    localStorage.setItem(STORAGE_KEY, newContent);
-    setHasUnsavedChanges(false);
+    dispatch(setContent(newContent));
+    dispatch(saveContent());
     toaster.create({
       title: "Content saved",
       description: "Your editor content has been saved",
@@ -40,9 +39,9 @@ const RichTextEditor = ({
       },
     },
     onUpdate: ({ editor }) => {
-      setHasUnsavedChanges(true);
+      dispatch(setHasUnsavedChanges(true));
       const newContent = editor?.getHTML() ?? "";
-      setContent(newContent);
+      dispatch(setContent(newContent));
     },
   });
 

@@ -1,18 +1,14 @@
 import { Container, Grid, GridItem } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Counter from "./components/Counter";
 import RichTextEditor from "./components/RichTextEditor";
-import { initialContent } from "../content";
-
-export const STORAGE_KEY = "editorContent";
+import { RootState } from "./store/store";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [content, setContent] = useState(() => {
-    const savedContent = localStorage.getItem(STORAGE_KEY);
-    return savedContent || initialContent;
-  });
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const hasUnsavedChanges = useSelector(
+    (state: RootState) => state.editor.hasUnsavedChanges
+  );
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -29,15 +25,10 @@ function App() {
     <Container>
       <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={6}>
         <GridItem>
-          <Counter count={count} setCount={setCount} />
+          <Counter />
         </GridItem>
         <GridItem>
-          <RichTextEditor
-            content={content}
-            setContent={setContent}
-            hasUnsavedChanges={hasUnsavedChanges}
-            setHasUnsavedChanges={setHasUnsavedChanges}
-          />
+          <RichTextEditor />
         </GridItem>
       </Grid>
     </Container>

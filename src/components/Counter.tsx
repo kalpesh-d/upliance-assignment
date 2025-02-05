@@ -7,17 +7,17 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { increment, decrement, setCount } from "../store/slices/counterSlice";
 
-const Counter = ({
-  count,
-  setCount,
-}: {
-  count: number;
-  setCount: (count: number) => void;
-}) => {
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(Math.max(0, count - 1));
-  const reset = () => setCount(0);
+const Counter = () => {
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => dispatch(increment());
+  const handleDecrement = () => dispatch(decrement());
+  const handleReset = () => dispatch(setCount(0));
 
   // Calculate background color intensity based on count
   const backgroundColor = `rgba(130, 0, 219, ${Math.min(count * 0.1, 1)})`;
@@ -44,17 +44,18 @@ const Counter = ({
           </Flex>
 
           <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <Button onClick={decrement} disabled={count === 0}>
+            <Button onClick={handleDecrement} disabled={count === 0}>
               -
             </Button>
-            <Button onClick={reset} disabled={count === 0}>
+            <Button onClick={handleReset} disabled={count === 0}>
               Reset
             </Button>
-            <Button onClick={increment}>+</Button>
+            <Button onClick={handleIncrement}>+</Button>
           </Grid>
         </VStack>
       </Container>
     </Box>
   );
 };
+
 export default Counter;
