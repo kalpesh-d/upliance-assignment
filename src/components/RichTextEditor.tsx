@@ -47,7 +47,7 @@ const RichTextEditor = ({
   });
 
   return (
-    <Box border="1px solid" borderColor="gray.200" borderRadius="md" p={4}>
+    <Box border="1px solid" borderColor="gray.200" borderRadius="2xl" p={4}>
       {editor && (
         <MenuBar
           editor={editor}

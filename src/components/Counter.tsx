@@ -32,7 +32,7 @@ const Counter = ({
       borderWidth={1}
       height="100%"
       display="flex"
-      rounded="md"
+      rounded="2xl"
     >
       <Container>
         <VStack>

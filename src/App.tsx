@@ -27,7 +27,7 @@ function App() {
 
   return (
     <Container>
-      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+      <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={6}>
         <GridItem>
           <Counter count={count} setCount={setCount} />
         </GridItem>

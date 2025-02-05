@@ -35,6 +35,7 @@ const MenuBar = ({
     <Flex justifyContent="space-between">
       <ButtonGroup gap={2} size="sm">
         <IconButton
+          rounded="lg"
           variant={editor.isActive("bold") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -42,7 +43,7 @@ const MenuBar = ({
           <Bold />
         </IconButton>
         <IconButton
-          aria-label="Toggle italic"
+          rounded="lg"
           variant={editor.isActive("italic") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
@@ -50,6 +51,7 @@ const MenuBar = ({
           <ItalicIcon />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant={editor.isActive("strike") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
@@ -57,6 +59,7 @@ const MenuBar = ({
           <Strikethrough />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant={editor.isActive("underline") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
@@ -64,6 +67,7 @@ const MenuBar = ({
           <UnderlineIcon />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant={editor.isActive("code") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleCode().run()}
           disabled={!editor.can().chain().focus().toggleCode().run()}
@@ -71,36 +75,42 @@ const MenuBar = ({
           <Code />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant="outline"
           onClick={() => editor.chain().focus().unsetAllMarks().run()}
         >
           <RemoveFormatting />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant="outline"
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
           <X />
         </IconButton>
         <IconButton
+          rounded="lg"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           variant={editor.isActive("bulletList") ? "solid" : "outline"}
         >
           <List />
         </IconButton>
         <IconButton
+          rounded="lg"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           variant={editor.isActive("orderedList") ? "solid" : "outline"}
         >
           <ListOrdered />
         </IconButton>
         <IconButton
+          rounded="lg"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           variant={editor.isActive("blockquote") ? "solid" : "outline"}
         >
           <TextQuote />
         </IconButton>
         <IconButton
+          rounded="lg"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           variant={editor.isActive("codeBlock") ? "solid" : "outline"}
         >
@@ -110,6 +120,7 @@ const MenuBar = ({
       <ButtonGroup size="sm">
         <Toaster />
         <IconButton
+          rounded="lg"
           variant={hasUnsavedChanges ? "solid" : "outline"}
           onClick={onSave}
           colorPalette={hasUnsavedChanges ? "green" : "gray"}
@@ -117,6 +128,7 @@ const MenuBar = ({
           <Save />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant="outline"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}
@@ -124,6 +136,7 @@ const MenuBar = ({
           <Undo />
         </IconButton>
         <IconButton
+          rounded="lg"
           variant="outline"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}
