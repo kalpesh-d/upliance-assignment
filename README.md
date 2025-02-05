@@ -89,7 +89,7 @@ The application uses Redux Toolkit for state management, organized into three ma
 ### Data Persistence
 - User data stored in localStorage under `userData` key
 - Editor content stored under `editorContent` key
-- Automatic saving mechanisms with unsaved changes tracking
+- Unsaved changes tracking
 
 ## Key Features
 
@@ -101,7 +101,6 @@ The application uses Redux Toolkit for state management, organized into three ma
 ### Rich Text Editing
 - Persistent content storage
 - Change tracking
-- Autosave functionality
 
 ### Animation
 - Smooth transitions using react-spring
