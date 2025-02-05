@@ -1,7 +1,5 @@
 export const initialContent = `
-<h2>
-  Hi there,
-</h2>
+<b><i>Hi there,</i></b>
 <p>
   this is a <Em>basic</Em> example of <strong>Rich Text Editor</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
 </p>
@@ -20,5 +18,5 @@ export const initialContent = `
   display: none;
 }</code></pre>
 <p>
-  I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
+  I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around.
 </p>`;

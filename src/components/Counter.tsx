@@ -26,12 +26,15 @@ const Counter = ({
     <Box
       transition="background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
       backgroundColor={backgroundColor}
-      borderWidth={1}
       borderColor="gray.200"
+      alignItems="center"
       borderRadius="lg"
+      borderWidth={1}
+      height="100%"
+      display="flex"
       rounded="md"
     >
-      <Container py={10}>
+      <Container>
         <VStack>
           <Flex direction="column" alignItems="center" my={5}>
             <Text fontSize="6xl" fontWeight="bold">

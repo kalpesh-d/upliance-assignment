@@ -1,4 +1,4 @@
-import { Flex, IconButton } from "@chakra-ui/react";
+import { ButtonGroup, Flex, IconButton } from "@chakra-ui/react";
 import { Editor } from "@tiptap/react";
 import {
   Bold,
@@ -14,18 +14,27 @@ import {
   Underline as UnderlineIcon,
   CodeXml,
   X,
+  Save,
 } from "lucide-react";
+import { Toaster } from "./ui/toaster";
 
-const MenuBar = ({ editor }: { editor: Editor }) => {
+const MenuBar = ({
+  editor,
+  onSave,
+  hasUnsavedChanges,
+}: {
+  editor: Editor;
+  onSave: () => void;
+  hasUnsavedChanges: boolean;
+}) => {
   if (!editor) {
     return null;
   }
 
   return (
     <Flex justifyContent="space-between">
-      <Flex gap={2}>
+      <ButtonGroup gap={2} size="sm">
         <IconButton
-          size="sm"
           variant={editor.isActive("bold") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -34,7 +43,6 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
         </IconButton>
         <IconButton
           aria-label="Toggle italic"
-          size="sm"
           variant={editor.isActive("italic") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
@@ -42,7 +50,6 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
           <ItalicIcon />
         </IconButton>
         <IconButton
-          size="sm"
           variant={editor.isActive("strike") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
@@ -50,7 +57,6 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
           <Strikethrough />
         </IconButton>
         <IconButton
-          size="sm"
           variant={editor.isActive("underline") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
@@ -58,7 +64,6 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
           <UnderlineIcon />
         </IconButton>
         <IconButton
-          size="sm"
           variant={editor.isActive("code") ? "solid" : "outline"}
           onClick={() => editor.chain().focus().toggleCode().run()}
           disabled={!editor.can().chain().focus().toggleCode().run()}
@@ -66,35 +71,30 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
           <Code />
         </IconButton>
         <IconButton
-          size="sm"
           variant="outline"
           onClick={() => editor.chain().focus().unsetAllMarks().run()}
         >
           <RemoveFormatting />
         </IconButton>
         <IconButton
-          size="sm"
           variant="outline"
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
           <X />
         </IconButton>
         <IconButton
-          size="sm"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           variant={editor.isActive("bulletList") ? "solid" : "outline"}
         >
           <List />
         </IconButton>
         <IconButton
-          size="sm"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           variant={editor.isActive("orderedList") ? "solid" : "outline"}
         >
           <ListOrdered />
         </IconButton>
         <IconButton
-          size="sm"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           variant={editor.isActive("blockquote") ? "solid" : "outline"}
         >
@@ -106,10 +106,17 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
         >
           <CodeXml />
         </IconButton>
-      </Flex>
-      <Flex>
+      </ButtonGroup>
+      <ButtonGroup size="sm">
+        <Toaster />
         <IconButton
-          size="sm"
+          variant={hasUnsavedChanges ? "solid" : "outline"}
+          onClick={onSave}
+          colorPalette={hasUnsavedChanges ? "green" : "gray"}
+        >
+          <Save />
+        </IconButton>
+        <IconButton
           variant="outline"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}
@@ -117,14 +124,13 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
           <Undo />
         </IconButton>
         <IconButton
-          size="sm"
           variant="outline"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}
         >
           <Redo />
         </IconButton>
-      </Flex>
+      </ButtonGroup>
     </Flex>
   );
 };
