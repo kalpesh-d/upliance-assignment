@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { increment, decrement, setCount } from "../store/slices/counterSlice";
+import { increment, decrement, reset } from "../store/slices/counterSlice";
 
 const Counter = () => {
   const count = useSelector((state: RootState) => state.counter.value);
@@ -17,7 +17,7 @@ const Counter = () => {
 
   const handleIncrement = () => dispatch(increment());
   const handleDecrement = () => dispatch(decrement());
-  const handleReset = () => dispatch(setCount(0));
+  const handleReset = () => dispatch(reset());
 
   // Calculate background color intensity based on count
   const backgroundColor = `rgba(130, 0, 219, ${Math.min(count * 0.1, 1)})`;
